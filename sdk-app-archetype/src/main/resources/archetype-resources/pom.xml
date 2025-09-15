@@ -7,7 +7,7 @@
     <groupId>${groupId}</groupId>
     <artifactId>${artifactId}</artifactId>
     <name>${artifactId}</name>
-    <version>${version}</version>
+    <version>0.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <description>${artifactId}</description>
@@ -87,9 +87,8 @@
 
     <repositories>
         <repository>
-            <id>kosdevcode</id>
-            <name>kOS Code Repository</name>
-            <url>https://maven.pkg.github.com/kosdev-code/kos-maven</url>
+            <id>kos.public</id>
+            <url>https://kondra.mycloudrepo.io/public/repositories/kos-public</url>
             <releases>
                 <updatePolicy>daily</updatePolicy>
                 <checksumPolicy>fail</checksumPolicy>
@@ -105,9 +104,8 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>kosdevcode</id>
-            <name>kOS Plugin Repository</name>
-            <url>https://maven.pkg.github.com/kosdev-code/kos-maven</url>
+            <id>kos.public</id>
+            <url>https://kondra.mycloudrepo.io/public/repositories/kos-public</url>
             <releases>
                 <updatePolicy>daily</updatePolicy>
                 <checksumPolicy>fail</checksumPolicy>

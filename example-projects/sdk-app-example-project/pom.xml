@@ -96,9 +96,8 @@
 
     <repositories>
         <repository>
-            <id>kosdevcode</id>
-            <name>kOS Code Repository</name>
-            <url>https://maven.pkg.github.com/kosdev-code/kos-maven</url>
+            <id>kos.public</id>
+            <url>https://kondra.mycloudrepo.io/public/repositories/kos-public</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>
@@ -116,9 +115,8 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>kosdevcode</id>
-            <name>kOS Plugin Repository</name>
-            <url>https://maven.pkg.github.com/kosdev-code/kos-maven</url>
+            <id>kos.public</id>
+            <url>https://kondra.mycloudrepo.io/public/repositories/kos-public</url>
             <releases>
                 <enabled>true</enabled>
                 <updatePolicy>daily</updatePolicy>

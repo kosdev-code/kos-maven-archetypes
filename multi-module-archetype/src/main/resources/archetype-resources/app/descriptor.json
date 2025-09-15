@@ -1,8 +1,8 @@
 {
   "kos": {
     "app": {
-      "appClass": "${package}.ExampleApp",
-      "appId": "system",
+      "appClass": "", //TODO add fully qualified app class
+      "appId": "system"
     }
   }
 }
