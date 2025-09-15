@@ -4,7 +4,7 @@
 
   <groupId>com.kos.archetypes</groupId>
   <artifactId>sdk-app</artifactId>
-  <version>1.0</version>
+  <version>0.0.0-SNAPSHOT</version>
   <packaging>maven-archetype</packaging>
 
   <name>sdk-app-archetype</name>
@@ -18,30 +18,4 @@
       </extension>
     </extensions>
   </build>
-
-  <description>example</description>
-
-  <url>https://www.example.com</url>
-
-  <developers>
-    <developer>
-      <name>Example</name>
-      <email>example@example.com</email>
-      <organization>Example</organization>
-      <organizationUrl>https://www.example.com</organizationUrl>
-    </developer>
-  </developers>
-
-  <licenses>
-    <license>
-      <name>BSD 3-Clause License</name>
-      <url>https://opensource.org/license/bsd-3-clause</url>
-    </license>
-  </licenses>
-
-  <scm>
-    <connection>unpublished</connection>
-    <developerConnection>unpublished</developerConnection>
-    <url>unpublished</url>
-  </scm>
 </project>

@@ -15,7 +15,6 @@
     <artifactId>${artifactId}</artifactId>
     <name>${artifactId}</name>
     <description>Example SDK</description>
-    <url>https://www.example.com</url>
 
     <dependencies>
         <dependency>
