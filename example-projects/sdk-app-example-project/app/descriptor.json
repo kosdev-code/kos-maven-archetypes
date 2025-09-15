@@ -1,0 +1,15 @@
+{
+  "kos": {
+    "app": {
+      "appClass": "com.org.example.ExampleApp",
+      "appId": "org.example",
+      "sdkClassPrefixes": [
+         "com.org.example"
+      ]
+    },
+    "softwareInfo": {
+      "name": "Example SDK App",
+      "group": "Example"
+    }
+  }
+}

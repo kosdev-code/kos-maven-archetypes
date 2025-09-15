@@ -1,0 +1,8 @@
+{
+  "kos": {
+    "app": {
+      "appClass": "${package}.ExampleApp",
+      "appId": "system"
+    }
+  }
+}

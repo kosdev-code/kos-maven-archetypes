@@ -1,0 +1,8 @@
+{
+  "kos": {
+    "app": {
+      "appClass": "com.example.org.ExampleApp",
+      "appId": "org-example"
+    }
+  }
+}
