@@ -13,9 +13,7 @@ system-app-archetype: is a single module system application archetype.
 ```
 mvn archetype:generate \
   -DarchetypeGroupId=com.kos.archetypes \
-  -DarchetypeArtifactId=system-app \
-  -DgroupId=com.nou.project \
-  -DartifactId=my-nou-project
+  -DarchetypeArtifactId=system-app
 ```
 
 basic-app-archetype: is a single module basic application archetype.
@@ -23,9 +21,7 @@ basic-app-archetype: is a single module basic application archetype.
 ```
 mvn archetype:generate \
  -DarchetypeGroupId=com.kos.archetypes \
- -DarchetypeArtifactId=app \
- -DgroupId=com.nou.project \
- -DartifactId=my-nou-project
+ -DarchetypeArtifactId=app
 ```
 
 sdk-app-archetype: is a multi module project for apps that also include SDKs.
@@ -33,9 +29,7 @@ sdk-app-archetype: is a multi module project for apps that also include SDKs.
 ```
 mvn archetype:generate \
  -DarchetypeGroupId=com.kos.archetypes \
- -DarchetypeArtifactId=sdk-app \
- -DgroupId=com.nou.project \
- -DartifactId=my-nou-project
+ -DarchetypeArtifactId=sdk-app
 ```
 
 multi-module-archetype: is a multi module system application archetype.
@@ -43,9 +37,18 @@ multi-module-archetype: is a multi module system application archetype.
 ```
 mvn archetype:generate \
  -DarchetypeGroupId=com.kos.archetypes \
- -DarchetypeArtifactId=multi-module \
- -DgroupId=com.nou.project \
- -DartifactId=my-nou-project
+ -DarchetypeArtifactId=multi-module
+```
+
+When generating any of these projects you can specify from the beginning
+the artifactID, the groupID, the version of the artifact and the package path,
+you want to use. By default the version is 0.0.0-SNAPSHOT
+
+```
+-DgroupId=com.myorg.myproject \
+-DartifactId=my-artifact \
+-Dversion=0.0.0-SNAPSHOT \
+-Dpackage=com.my.package
 ```
 
 example-projects
