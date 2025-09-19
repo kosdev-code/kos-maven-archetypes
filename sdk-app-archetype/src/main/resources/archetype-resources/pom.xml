@@ -26,6 +26,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
         <lombok.version>1.18.38</lombok.version>
     </properties>
@@ -68,6 +69,23 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- Compiler -->
+                <!-- https://maven.apache.org/plugins/maven-compiler-plugin/index.html -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
                 <!-- kOS Maven Plugins -->
                 <plugin>
                     <groupId>com.kosdev.kos.maven</groupId>
