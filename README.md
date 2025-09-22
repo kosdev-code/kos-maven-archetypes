@@ -55,4 +55,3 @@ example-projects
 single-module-example-project: is the project used to create the single module archetypes.
 multi-module-example-project: is the project used to create the multi module archetypes.
 sdk-app-example-project: is the project used to create the SDK app archetype.
-test
