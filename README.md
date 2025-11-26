@@ -1,10 +1,11 @@
 # kos archetypes
 
 This repository contains Maven archetypes for creating new projects.
-To use one of these archetypes, you can clone this repo, then do the following.
+To use one of these archetypes, you can clone this repo, then run the install script.
 
-1. cd to the archetype directory you want to use.
-2. run `mvn install` to install the archetype to your local Maven repository.
+```bash
+./install_archetypes.sh
+```
 
 Now you can run the `mvn archetype:generate` command with the appropriate parameters.
 
