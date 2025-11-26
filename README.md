@@ -4,6 +4,8 @@ This repository contains Maven archetypes for creating new projects.
 To use one of these archetypes, you can clone this repo, then run the install script.
 
 ```bash
+git clone https://github.com/kosdev-code/kos-maven-archetypes
+cd kos-maven-archetyps
 ./install_archetypes.sh
 ```
 
