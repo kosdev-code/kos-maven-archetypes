@@ -5,7 +5,13 @@ To use one of these archetypes, you can clone this repo, then run the install sc
 
 ```bash
 git clone https://github.com/kosdev-code/kos-maven-archetypes
+```
+
+```bash
 cd kos-maven-archetyps
+```
+
+```bash
 ./install_archetypes.sh
 ```
 
