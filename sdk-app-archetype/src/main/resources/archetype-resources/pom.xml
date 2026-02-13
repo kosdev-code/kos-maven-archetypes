@@ -20,7 +20,9 @@
         <kos-kab-maven-plugin.version>1.3.4</kos-kab-maven-plugin.version>
         <kos-sdk-maven-plugin.version>1.0.1</kos-sdk-maven-plugin.version>
 
+        <!-- Specify encoding so that build is not platform dependent -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>17</java.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.compiler.source>${java.version}</maven.compiler.source>
