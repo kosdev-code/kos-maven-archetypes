@@ -20,6 +20,14 @@
             <artifactId>api-dispense</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.kosdev.kos.sdk.api</groupId>
+            <artifactId>api-freestyle</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>com.kosdev.kos.sdk.api</groupId>
+          <artifactId>api-info</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
