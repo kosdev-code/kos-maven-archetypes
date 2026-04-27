@@ -19,8 +19,6 @@ dist/
 #  UI zip
 ui.zip
 
-#  Temporary to support M1 Mac SWT Native Libraries
-!kos-studio/lib/swt.jar
 
 # Maven
 target/
