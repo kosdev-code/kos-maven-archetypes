@@ -6,14 +6,14 @@
 
     <parent>
         <groupId>${groupId}</groupId>
-        <artifactId>${rootArtifactId}</artifactId>
+        <artifactId>${rootArtifactId}-sdk-app</artifactId>
         <version>${version}</version>
     </parent>
 
     <!-- ====== Basics =============================================================== -->
 
-    <artifactId>${artifactId}</artifactId>
-    <name>${artifactId}</name>
+    <artifactId>${artifactId}-sdk-app.sdk</artifactId>
+    <name>${artifactId}-sdk-app.sdk</name>
     <description>Example SDK</description>
 
     <dependencies>
@@ -50,9 +50,9 @@
                             <goal>sdk</goal>
                         </goals>
                         <configuration>
-                           <srcDirs>
-                              <srcDir>../core</srcDir>
-                           </srcDirs>
+                            <srcDirs>
+                                <srcDir>../core</srcDir>
+                            </srcDirs>
                         </configuration>
                     </execution>
                 </executions>
@@ -106,7 +106,7 @@
             <build>
                 <plugins>
 
-                <!-- build the pom-to-deploy.xml file from template -->
+                    <!-- build the pom-to-deploy.xml file from template -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-resources-plugin</artifactId>
@@ -145,15 +145,15 @@
                                 <goals>
                                     <goal>attach-artifact</goal>
                                 </goals>
-                            <configuration>
-                                <artifacts>
-                                <artifact>
-                                    <file>templates/output/pom-to-deploy.xml</file>
-                                    <type>xml</type>
-                                    <classifier>pom</classifier>
-                                </artifact>
-                                </artifacts>
-                            </configuration>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>templates/output/pom-to-deploy.xml</file>
+                                            <type>xml</type>
+                                            <classifier>pom</classifier>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

@@ -65,7 +65,7 @@
                             <goal>kabtool</goal>
                         </goals>
                         <configuration>
-                            <type>kos.system</type>
+                            <type>kos.app</type>
                             <content>
                                 <copy>
                                     <include>descriptor.json</include>

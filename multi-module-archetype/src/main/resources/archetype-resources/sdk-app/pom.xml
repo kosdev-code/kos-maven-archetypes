@@ -2,13 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}</artifactId>
-    <version>${version}</version>
-    <packaging>pom</packaging>
+    <!-- ====== Basics =============================================================== -->
+
+    <parent>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}</artifactId>
+        <version>${version}</version>
+    </parent>
+
+    <artifactId>${artifactId}-sdk-app</artifactId>
+
+    <!-- ====== Properties =========================================================== -->
 
     <properties>
-        <kos.version>0.0.0-SNAPSHOT</kos.version>
+        <kos-bom.version>0.0.0-SNAPSHOT</kos-bom.version>
         <lombok.version>1.18.38</lombok.version>
 
         <java.version>17</java.version>
@@ -25,13 +32,23 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
+    <!-- ====== Modules ============================================================== -->
+
+    <modules>
+        <module>core</module>
+        <module>app</module>
+        <module>sdk</module>
+    </modules>
+
+    <!-- ====== Dependency Management ================================================ -->
+
     <dependencyManagement>
         <dependencies>
-            <!-- kOS SDK -->
+            <!-- BOM for kOS SDK Code (core, dispense, freestyle) -->
             <dependency>
                 <groupId>com.kosdev.kos.sdk.bom</groupId>
                 <artifactId>kos-bom</artifactId>
-                <version>${kos.version}</version>
+                <version>${kos-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -47,6 +64,8 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- ====== Plugin Management ==================================================== -->
+
     <build>
         <pluginManagement>
             <plugins>
@@ -57,8 +76,6 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
                         <annotationProcessorPaths>
                             <path>
                                 <groupId>org.projectlombok</groupId>
@@ -68,50 +85,31 @@
                         </annotationProcessorPaths>
                     </configuration>
                 </plugin>
-
-                <!-- Assembly -->
-                <!-- https://maven.apache.org/plugins/maven-assembly-plugin/ -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>${maven-assembly-plugin.version}</version>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
 
-    <repositories>
-        <repository>
-            <id>kos.public</id>
-            <url>https://kondra.mycloudrepo.io/public/repositories/kos-public</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>kos.public</id>
-            <url>https://kondra.mycloudrepo.io/public/repositories/kos-public</url>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>daily</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>fail</checksumPolicy>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
+    <profiles>
+        <profile>
+            <id>automation</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.4</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

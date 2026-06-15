@@ -6,57 +6,20 @@
 
     <parent>
         <groupId>${groupId}</groupId>
-        <artifactId>${rootArtifactId}</artifactId>
+        <artifactId>${rootArtifactId}-sdk-app</artifactId>
         <version>${version}</version>
     </parent>
 
     <!-- ====== Basics =============================================================== -->
 
-    <artifactId>${artifactId}</artifactId>
-    <name>${artifactId}</name>
-    <description>Example SDK</description>
+    <artifactId>${artifactId}-sdk-app.core</artifactId>
+    <name>${artifactId}-sdk-app.core</name>
+    <description>Example Core</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.kosdev.kos.sdk.tools</groupId>
-            <artifactId>annotations</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kosdev.kos.sdk.api</groupId>
-            <artifactId>api-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kosdev.kos.sdk.api</groupId>
-            <artifactId>api-dispense</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-    </dependencies>
-
-    <!-- ====== Build ================================================================ -->
-
+    <!-- We must generate a -javadoc JAR file to publish on Maven Central, also we must
+         generate a sources JAR file -->
     <build>
         <plugins>
-            <!-- build the sdk -->
-            <plugin>
-                <groupId>com.kosdev.kos.maven</groupId>
-                <artifactId>kos-sdk-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>sdk</goal>
-                        </goals>
-                        <configuration>
-                           <srcDirs>
-                              <srcDir>../core</srcDir>
-                           </srcDirs>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -96,43 +59,74 @@
             </plugin>
         </plugins>
     </build>
+    <!-- ====== Dependencies  ======================================================== -->
 
+    <dependencies>
+        <dependency>
+            <groupId>com.kosdev.kos.sdk.tools</groupId>
+            <artifactId>annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kosdev.kos.sdk.api</groupId>
+            <artifactId>api-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kosdev.kos.sdk.api</groupId>
+            <artifactId>api-dispense</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kosdev.kos.sdk.api</groupId>
+            <artifactId>api-freestyle</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kosdev.kos.sdk.api</groupId>
+            <artifactId>api-info</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
     <profiles>
+        <profile>
+            <!--
+                When we included this plugin in the automation profile, the pom-to-deploy.xml file would
+                be generated, but the src/main/resources files would not be packaged in the JAR.
+                After struggling with it, I split it out from the automation profile.  Automation will
+                run this profile first, and then run the automation profile where everything will
+                be packaged and signed properly.
+            -->
+            <id>generatePomFromTemplate</id>
+            <build>
+                <plugins>
+                    <!-- Builds the pom-to-deploy.xml file from its template -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <configuration>
+                            <outputDirectory>templates/output</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>templates</directory>
+                                    <includes>
+                                        <include>pom-to-deploy.xml</include>
+                                    </includes>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
         <!-- automation creates a complete output suitable for publishing to Maven Central.profile>
+            We must run the generatePomFromTemplate profile first.
         </profile> -->
         <profile>
             <id>automation</id>
             <build>
                 <plugins>
-
-                <!-- build the pom-to-deploy.xml file from template -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>generate-pom-from-template</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>templates/output</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>templates</directory>
-                                            <includes>
-                                                <include>pom-to-deploy.xml</include>
-                                            </includes>
-                                            <filtering>true</filtering>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
                     <!-- this adds the pom-to-deploy artifact to the projects such that it will be signed -->
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
@@ -145,15 +139,15 @@
                                 <goals>
                                     <goal>attach-artifact</goal>
                                 </goals>
-                            <configuration>
-                                <artifacts>
-                                <artifact>
-                                    <file>templates/output/pom-to-deploy.xml</file>
-                                    <type>xml</type>
-                                    <classifier>pom</classifier>
-                                </artifact>
-                                </artifacts>
-                            </configuration>
+                                <configuration>
+                                    <artifacts>
+                                        <artifact>
+                                            <file>templates/output/pom-to-deploy.xml</file>
+                                            <type>xml</type>
+                                            <classifier>pom</classifier>
+                                        </artifact>
+                                    </artifacts>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
@@ -175,4 +169,5 @@
             </build>
         </profile>
     </profiles>
+
 </project>

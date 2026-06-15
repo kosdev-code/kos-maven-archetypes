@@ -2,15 +2,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- ====== Parent =============================================================== -->
+
     <parent>
-        <groupId>com.org</groupId>
-        <artifactId>multi-module-example-project</artifactId>
-        <version>0.0.0-SNAPSHOT</version>
+        <groupId>${groupId}</groupId>
+        <artifactId>${rootArtifactId}-sdk-app</artifactId>
+        <version>${version}</version>
     </parent>
 
-    <artifactId>multi-module-example-project-app</artifactId>
+    <!-- ====== Basics =============================================================== -->
+
+    <artifactId>${artifactId}-sdk-app.app</artifactId>
+    <name>${artifactId}-sdk-app.app</name>
+    <description>Example App</description>
+
+    <!-- ====== Dependencies  ======================================================== -->
 
     <dependencies>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>${rootArtifactId}.core</artifactId>
+            <version>${version}</version>
+        </dependency>
         <dependency>
             <groupId>com.kosdev.kos.sdk.api</groupId>
             <artifactId>api-core</artifactId>
@@ -20,21 +33,23 @@
             <artifactId>api-dispense</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.kosdev.kos.sdk.api</groupId>
-            <artifactId>api-freestyle</artifactId>
-        </dependency>
-        <dependency>
-          <groupId>com.kosdev.kos.sdk.api</groupId>
-          <artifactId>api-info</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
+    <!-- ====== Build ================================================================ -->
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip> <!-- Skip deployment for submodules in this profile -->
+                </configuration>
+            </plugin>
+            <!-- Add the dependencies and then package the output into a ZIP file -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -54,7 +69,7 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <!-- Convert to a KAB file -->
             <plugin>
                 <groupId>com.kosdev.kos.maven</groupId>
                 <artifactId>kos-kab-maven-plugin</artifactId>
@@ -68,7 +83,9 @@
                             <type>kos.app</type>
                             <content>
                                 <copy>
-                                    <include>descriptor.json</include>
+                                    <includes>
+                                        <include>descriptor.json</include>
+                                    </includes>
                                 </copy>
                                 <copy>
                                     <include>${project.build.directory}/${project.artifactId}-${project.version}-jar-with-dependencies.jar</include>
